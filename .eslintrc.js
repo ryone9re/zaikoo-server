@@ -21,6 +21,12 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'semi': ['error', 'always'],
+    'semi-spacing': ['error', {'after': true, 'before': false}],
+    'semi-style': ['error', 'last'],
+    'no-extra-semi': 'error',
+    'no-unexpected-multiline': 'error',
+    'no-unreachable': 'error'
   },
   settings: {
     "import/resolver": {
