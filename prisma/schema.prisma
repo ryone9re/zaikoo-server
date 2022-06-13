@@ -10,18 +10,100 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+model Supplier {
+  id               Int      @id @default(autoincrement())
+  supplier_name    String
+  postal_code      String
+  address          String
+  email_address    String
+  phone_number     String
+  division_name    String?
+  responsible_name String?
+  stock            Stock[]
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean? @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model Base {
+  id               Int      @id @default(autoincrement())
+  base_name        String
+  postal_code      String
+  address          String
+  phone_number     String?
+  email_address    String?
+  division_name    String?
+  responsible_name String?
+  stock            Stock[]
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+}
+
+model Stock {
+  id                  Int      @id @default(autoincrement())
+  product             Product  @relation(fields: [product_id], references: [id])
+  product_id          Int
+  supplier            Supplier @relation(fields: [supplier_id], references: [id])
+  supplier_id         Int
+  stock_quantity      Int
+  purchase_unit_price Int
+  selling_unit_price  Int?
+  base                Base?    @relation(fields: [base_id], references: [id])
+  base_id             Int?
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+}
+
+model Product {
+  id               Int            @id @default(autoincrement())
+  denomination     String
+  name             String
+  description      String?
+  part_number      Int?
+  reorder_point    Int?
+  category         Child_category @relation(fields: [category_id], references: [id])
+  category_id      Int
+  tax              Tax_rate       @relation(fields: [tax_id], references: [id])
+  tax_id           Int
+  stock            Stock[]
+  request_product  Menu[]         @relation("RequestProduct")
+  required_product Menu[]         @relation("RequiredProduct")
+  created_at       DateTime       @default(now())
+  updated_at       DateTime       @updatedAt
+}
+
+model Menu {
+  id                  Int     @id @default(autoincrement())
+  request_product     Product @relation(name: "RequestProduct", fields: [request_product_id], references: [id])
+  request_product_id  Int
+  required_product    Product @relation(name: "RequiredProduct", fields: [required_product_id], references: [id])
+  required_product_id Int
+  required_number     Int
+}
+
+model Parent_category {
+  id         Int              @id @default(autoincrement())
+  name       String           @unique
+  child      Child_category[]
+  created_at DateTime         @default(now())
+  updated_at DateTime         @updatedAt
+}
+
+model Child_category {
+  id         Int             @id @default(autoincrement())
+  parent     Parent_category @relation(fields: [parent_id], references: [id])
+  parent_id  Int
+  name       String
+  product    Product[]
+  created_at DateTime        @default(now())
+  updated_at DateTime        @updatedAt
+
+  @@unique([parent_id, name])
+}
+
+model Tax_rate {
+  id         Int       @id @default(autoincrement())
+  rate       Float
+  product    Product[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
 }
