@@ -1,5 +1,5 @@
 import { Product } from '@prisma/client';
-import dayjs from 'dayjs';
+import { addHours, addMinutes } from 'date-fns';
 
 export const productMocks: Product[] = [
   {
@@ -11,8 +11,8 @@ export const productMocks: Product[] = [
     reorder_point: 5,
     category_id: 1,
     tax_id: 1,
-    created_at: dayjs('2022-06-01 10:33:12').toDate(),
-    updated_at: dayjs('2022-06-01 10:33:12').toDate(),
+    created_at: new Date(2022, 6, 1, 10, 33, 12),
+    updated_at: new Date(2022, 6, 1, 10, 33, 12),
   },
   {
     id: 2,
@@ -23,8 +23,8 @@ export const productMocks: Product[] = [
     reorder_point: 50,
     category_id: 1,
     tax_id: 2,
-    created_at: dayjs('2022-06-03 11:02:01').toDate(),
-    updated_at: dayjs('2022-06-03 11:02:01').add(5, 'd').toDate(),
+    created_at: new Date(2022, 6, 3, 11, 2, 1),
+    updated_at: addHours(new Date(2022, 6, 3, 11, 2, 1), 4),
   },
   {
     id: 3,
@@ -35,8 +35,8 @@ export const productMocks: Product[] = [
     reorder_point: 1,
     category_id: 1,
     tax_id: 1,
-    created_at: dayjs('2022-06-08 01:22:53').toDate(),
-    updated_at: dayjs('2022-06-08 01:22:53').toDate(),
+    created_at: new Date(2022, 6, 8, 1, 22, 53),
+    updated_at: new Date(2022, 6, 8, 1, 22, 53),
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ export const productMocks: Product[] = [
     reorder_point: 2,
     category_id: 1,
     tax_id: 1,
-    created_at: dayjs('2022-06-13 13:13:13').toDate(),
-    updated_at: dayjs('2022-06-13 13:13:13').toDate(),
+    created_at: new Date(2022, 6, 13, 13, 13, 13),
+    updated_at: addMinutes(new Date(2022, 6, 13, 13, 13, 13), 10),
   },
 ];
