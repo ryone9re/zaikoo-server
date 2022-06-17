@@ -21,17 +21,20 @@ export class ProductController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.productService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.productService.findOne({ id: Number(id) });
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: Prisma.ProductUpdateInput) {
+  async update(
+    @Param('id') id: string,
+    @Body() body: Prisma.ProductUpdateInput,
+  ) {
     return this.productService.update({
       where: { id: Number(id) },
       data: body,
@@ -39,7 +42,7 @@ export class ProductController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.productService.remove({ id: Number(id) });
   }
 }
