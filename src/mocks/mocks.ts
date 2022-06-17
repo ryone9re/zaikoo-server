@@ -1,4 +1,4 @@
-import { Product } from '@prisma/client';
+import { Product, Child_category } from '@prisma/client';
 import { addHours, addMinutes } from 'date-fns';
 
 export const productMocks: Product[] = [
@@ -49,5 +49,36 @@ export const productMocks: Product[] = [
     tax_id: 1,
     created_at: new Date(2022, 6, 13, 13, 13, 13),
     updated_at: addMinutes(new Date(2022, 6, 13, 13, 13, 13), 10),
+  },
+];
+
+export const categoryMocks: Child_category[] = [
+  {
+    id: 1,
+    parent_id: 2,
+    name: '小カテゴリ1 変更1 < 親カテゴリ1',
+    created_at: new Date('2022-06-17T13:22:55.005Z'),
+    updated_at: new Date('2022-06-17T17:22:09.188Z'),
+  },
+  {
+    id: 3,
+    parent_id: 1,
+    name: '小カテゴリ2 変更1 < 親カテゴリ1',
+    created_at: new Date('2022-06-17T17:36:55.698Z'),
+    updated_at: new Date('2022-06-17T17:36:55.698Z'),
+  },
+  {
+    id: 4,
+    parent_id: 2,
+    name: '小カテゴリ1 変更1 < 親カテゴリ2',
+    created_at: new Date('2022-06-17T17:37:02.742Z'),
+    updated_at: new Date('2022-06-17T17:37:02.743Z'),
+  },
+  {
+    id: 5,
+    parent_id: 2,
+    name: '小カテゴリ2 変更1 < 親カテゴリ2',
+    created_at: new Date('2022-06-17T17:37:07.723Z'),
+    updated_at: new Date('2022-06-17T17:37:07.723Z'),
   },
 ];
