@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TaxRatesService } from './tax-rates.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+
 import { CreateTaxRateDto } from './dto/create-tax-rate.dto';
 import { UpdateTaxRateDto } from './dto/update-tax-rate.dto';
+import { TaxRatesService } from './tax-rates.service';
 
 @Controller('tax-rates')
 export class TaxRatesController {
