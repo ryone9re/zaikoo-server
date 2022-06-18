@@ -134,25 +134,3 @@ describe('CategoryService', () => {
     await prisma.parent_category.deleteMany({});
   });
 });
-
-// async updateChild(id: number, body: UpdateCategoryDto) {
-//   const data: Prisma.Child_categoryUpdateInput = {
-//     name: body.name,
-//   };
-//   if (body.parent) {
-//     data.parent = {
-//       connect: { id: body.parent.id },
-//       update: { id: body.parent.id },
-//     };
-//   }
-//   let result;
-//   try {
-//     result = await this.prisma.child_category.update({
-//       where: { id: id },
-//       data: data,
-//     });
-//   } catch (e) {
-//     throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-//   }
-//   return result;
-// }
