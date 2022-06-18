@@ -1,27 +1,33 @@
 import { Injectable } from '@nestjs/common';
 
+import { PrismaService } from './../prisma.service';
 import { CreateTaxRateDto } from './dto/create-tax-rate.dto';
 import { UpdateTaxRateDto } from './dto/update-tax-rate.dto';
 
 @Injectable()
 export class TaxRatesService {
-  create(createTaxRateDto: CreateTaxRateDto) {
-    return 'This action adds a new taxRate';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createTaxRateDto: CreateTaxRateDto) {
+    return this.prisma.tax_rate.create({ data: createTaxRateDto });
   }
 
   findAll() {
-    return `This action returns all taxRates`;
+    return this.prisma.tax_rate.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} taxRate`;
+    return this.prisma.tax_rate.findUnique({ where: { id: id } });
   }
 
   update(id: number, updateTaxRateDto: UpdateTaxRateDto) {
-    return `This action updates a #${id} taxRate`;
+    return this.prisma.tax_rate.update({
+      where: { id: id },
+      data: updateTaxRateDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} taxRate`;
+    return this.prisma.tax_rate.delete({ where: { id: id } });
   }
 }

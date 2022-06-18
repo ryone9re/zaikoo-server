@@ -12,7 +12,7 @@ import { CreateTaxRateDto } from './dto/create-tax-rate.dto';
 import { UpdateTaxRateDto } from './dto/update-tax-rate.dto';
 import { TaxRatesService } from './tax-rates.service';
 
-@Controller('tax-rates')
+@Controller('api/tax-rates')
 export class TaxRatesController {
   constructor(private readonly taxRatesService: TaxRatesService) {}
 
