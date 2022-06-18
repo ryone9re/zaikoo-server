@@ -12,22 +12,22 @@ export class TaxRatesService {
     return this.prisma.tax_rate.create({ data: createTaxRateDto });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.tax_rate.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.prisma.tax_rate.findUnique({ where: { id: id } });
   }
 
-  update(id: number, updateTaxRateDto: UpdateTaxRateDto) {
+  async update(id: number, updateTaxRateDto: UpdateTaxRateDto) {
     return this.prisma.tax_rate.update({
       where: { id: id },
       data: updateTaxRateDto,
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prisma.tax_rate.delete({ where: { id: id } });
   }
 }
