@@ -13,11 +13,14 @@ datasource db {
 model Supplier {
   id               Int      @id @default(autoincrement())
   supplier_name    String
+  // No hyphen
   postal_code      String
   address          String
   email_address    String
+  // No hyphen
   phone_number     String
   division_name    String?
+  // No divide
   responsible_name String?
   stock            Stock[]
   created_at       DateTime @default(now())
@@ -27,11 +30,14 @@ model Supplier {
 model Base {
   id               Int      @id @default(autoincrement())
   base_name        String
+  // No hyphen
   postal_code      String
   address          String
+  // No hyphen
   phone_number     String?
   email_address    String?
   division_name    String?
+  // No divide
   responsible_name String?
   stock            Stock[]
   created_at       DateTime @default(now())
@@ -102,6 +108,7 @@ model Child_category {
 
 model Tax_rate {
   id         Int       @id @default(autoincrement())
+  // If tax rate is 10%, the value is 0.1
   rate       Float
   product    Product[]
   created_at DateTime  @default(now())
