@@ -128,9 +128,4 @@ describe('CategoryService', () => {
     const res = await prisma.parent_category.findUnique({ where: { id: 4 } });
     expect(res).toBeNull();
   });
-
-  afterAll(async () => {
-    await prisma.child_category.deleteMany({});
-    await prisma.parent_category.deleteMany({});
-  });
 });
