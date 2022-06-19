@@ -7,9 +7,10 @@ import { OfficeModule } from './office/office.module';
 import { ProductModule } from './product/product.module';
 import { TaxRatesModule } from './tax-rates/tax-rates.module';
 import { MenuModule } from './menu/menu.module';
+import { StockModule } from './stock/stock.module';
 
 @Module({
-  imports: [ProductModule, CategoryModule, TaxRatesModule, OfficeModule, MenuModule],
+  imports: [ProductModule, CategoryModule, TaxRatesModule, OfficeModule, MenuModule, StockModule],
   controllers: [AppController],
   providers: [AppService],
 })
