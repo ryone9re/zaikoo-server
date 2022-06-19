@@ -263,4 +263,8 @@ describe('SupplierService', () => {
     );
     await expect(service.findAll()).resolves.toEqual(wantValue);
   });
+
+  afterAll(async () => {
+    await primsa.supplier.deleteMany({});
+  });
 });

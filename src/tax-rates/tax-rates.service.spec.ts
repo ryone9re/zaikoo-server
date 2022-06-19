@@ -85,4 +85,8 @@ describe('TaxRatesService', () => {
     await expect(service.remove(taxResponse.id)).resolves.toEqual(taxResponse);
     return service.remove(2000000).catch((e) => expect(e).toBe(e));
   });
+
+  afterAll(async () => {
+    await prisma.tax_rate.deleteMany({});
+  });
 });

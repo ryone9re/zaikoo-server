@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Child_category, Tax_rate } from '@prisma/client';
-import { v7 as uuidv7 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import { PrismaService } from './../prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -24,8 +24,8 @@ describe('ProductService', () => {
 
     testCategory = await prisma.child_category.create({
       data: {
-        parent: { create: { name: uuidv7() } },
-        name: uuidv7(),
+        parent: { create: { name: uuidv4() } },
+        name: uuidv4(),
       },
     });
     testTaxRate = await prisma.tax_rate.create({
@@ -169,6 +169,7 @@ describe('ProductService', () => {
   });
 
   afterAll(async () => {
+    await prisma.product.deleteMany({});
     await prisma.child_category.delete({ where: { id: testCategory.id } });
     await prisma.parent_category.delete({
       where: { id: testCategory.parent_id },

@@ -221,4 +221,8 @@ describe('BaseService', () => {
       createResponseNotIncludeRequired,
     ]);
   });
+
+  afterAll(async () => {
+    await prisma.base.deleteMany({});
+  });
 });
