@@ -96,17 +96,14 @@ describe('SupplierService', () => {
 
   it('findAll', async () => {
     const wantValue = [
-      Object.assign(createnoDivResName, additionalData, {
-        division_name: null,
-        responsible_name: null,
-      }),
+      createResponseNoDivResName,
       Object.assign(createNoResName, additionalData, {
         responsible_name: null,
       }),
       Object.assign(createNoDivName, additionalData, {
         division_name: null,
       }),
-      Object.assign(createWithBoth, additionalData),
+      createResponseWithBoth,
     ];
     await expect(service.findAll()).resolves.toEqual(wantValue);
   });
