@@ -18,17 +18,22 @@ export class MenuController {
 
   @Post()
   create(@Body() createMenuDto: CreateMenuDto) {
-    return this.menuService.create(createMenuDto);
+    return this.menuService.createMenu(createMenuDto);
   }
 
   @Get()
   findAll() {
-    return this.menuService.findAll();
+    return this.menuService.findMenuAll();
+  }
+
+  @Get(':request_product_id')
+  findMenu(@Param('request_product_id') request_product_id: number) {
+    return this.menuService.findMenu(request_product_id);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.menuService.findOne(+id);
+    return this.menuService.findMenuOne(+id);
   }
 
   @Patch(':id')
