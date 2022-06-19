@@ -247,4 +247,20 @@ describe('SupplierService', () => {
       createResponseWithBoth,
     );
   });
+
+  it('findResultAll', async () => {
+    const wantValue = [];
+    wantValue.push(
+      Object.assign(createResponseNoDivResName, {
+        updated_at: expect.any(Date),
+      }),
+      Object.assign(createNoResName, additionalData, {
+        responsible_name: null,
+      }),
+      Object.assign(createNoDivName, additionalData, {
+        division_name: null,
+      }),
+    );
+    await expect(service.findAll()).resolves.toEqual(wantValue);
+  });
 });

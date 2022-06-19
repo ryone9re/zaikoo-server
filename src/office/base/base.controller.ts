@@ -12,7 +12,7 @@ import { BaseService } from './base.service';
 import { CreateBaseDto } from './dto/create-base.dto';
 import { UpdateBaseDto } from './dto/update-base.dto';
 
-@Controller('base')
+@Controller('/api/office/base')
 export class BaseController {
   constructor(private readonly baseService: BaseService) {}
 
