@@ -15,7 +15,7 @@ describe('SupplierService', () => {
 
     service = module.get<SupplierService>(SupplierService);
     primsa = module.get<PrismaService>(PrismaService);
-    await primsa.supplier.deleteMany({});
+    return primsa.supplier.deleteMany({});
   });
 
   it('should be defined', () => {

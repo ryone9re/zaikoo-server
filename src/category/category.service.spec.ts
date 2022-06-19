@@ -32,7 +32,7 @@ describe('CategoryService', () => {
         },
       ],
     });
-    await prisma.child_category.createMany({
+    return prisma.child_category.createMany({
       data: [
         {
           id: 1,

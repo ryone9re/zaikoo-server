@@ -16,7 +16,7 @@ describe('BaseService', () => {
     service = module.get<BaseService>(BaseService);
     prisma = module.get<PrismaService>(PrismaService);
 
-    await prisma.base.deleteMany({});
+    return prisma.base.deleteMany({});
   });
 
   const createNotIncludeRequired: CreateBaseDto = {
