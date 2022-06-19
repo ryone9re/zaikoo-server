@@ -78,12 +78,14 @@ model Product {
 }
 
 model Menu {
-  id                  Int     @id @default(autoincrement())
-  request_product     Product @relation(name: "RequestProduct", fields: [request_product_id], references: [id])
+  id                  Int      @id @default(autoincrement())
+  request_product     Product  @relation(name: "RequestProduct", fields: [request_product_id], references: [id])
   request_product_id  Int
-  required_product    Product @relation(name: "RequiredProduct", fields: [required_product_id], references: [id])
+  required_product    Product  @relation(name: "RequiredProduct", fields: [required_product_id], references: [id])
   required_product_id Int
   required_number     Int
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
 
   @@unique([request_product_id, required_product_id])
 }
