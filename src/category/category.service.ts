@@ -23,7 +23,7 @@ export class CategoryService {
         connectOrCreate: {
           where: createCategoryDto.parent,
           create: {
-            name: createCategoryDto.name,
+            name: createCategoryDto.parent.name,
           },
         },
       },
