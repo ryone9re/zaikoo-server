@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumberString,
+  IsOptional,
   IsString,
   Length,
 } from 'class-validator';
@@ -20,16 +21,20 @@ export class CreateBaseDto {
   @IsString()
   address: string;
 
+  @IsOptional()
   @IsNumberString()
   @Length(0, 15)
   phone_number?: string;
 
+  @IsOptional()
   @IsEmail()
   email_address?: string;
 
+  @IsOptional()
   @IsString()
   division_name?: string;
 
+  @IsOptional()
   @IsString()
   responsible_name?: string;
 }

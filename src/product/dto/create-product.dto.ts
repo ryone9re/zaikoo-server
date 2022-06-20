@@ -1,7 +1,7 @@
 import {
   IsNotEmpty,
   IsNumber,
-  IsNumberString,
+  IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
@@ -25,13 +25,16 @@ export class CreateProductDto {
   @IsPositive()
   tax_id: number;
 
+  @IsOptional()
   @IsString()
   description?: string;
 
-  @IsNumberString()
+  @IsOptional()
+  @IsNumber()
   @IsPositive()
   part_number?: number;
 
+  @IsOptional()
   @IsNumber()
   @IsPositive()
   reorder_point?: number;

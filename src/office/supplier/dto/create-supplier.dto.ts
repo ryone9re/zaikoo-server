@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumberString,
+  IsOptional,
   IsString,
   Length,
 } from 'class-validator';
@@ -29,9 +30,11 @@ export class CreateSupplierDto {
   @Length(0, 15)
   phone_number: string;
 
+  @IsOptional()
   @IsString()
   division_name?: string;
 
+  @IsOptional()
   @IsString()
   responsible_name?: string;
 }
