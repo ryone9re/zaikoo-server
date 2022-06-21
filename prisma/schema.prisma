@@ -53,8 +53,8 @@ model Stock {
   stock_quantity      Int
   purchase_unit_price Int
   selling_unit_price  Int?
-  base                Base?    @relation(fields: [base_id], references: [id])
-  base_id             Int?
+  base                Base     @relation(fields: [base_id], references: [id])
+  base_id             Int
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
 }
