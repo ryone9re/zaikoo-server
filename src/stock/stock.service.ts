@@ -1,30 +1,44 @@
 import { Injectable } from '@nestjs/common';
 
+import { MenuService } from './../menu/menu.service';
 import { PrismaService } from './../prisma.service';
+import { CreateStockFromMenuDto } from './dto/create-stock-from-menu.dto';
 import { CreateStockDto } from './dto/create-stock.dto';
 import { UpdateStockDto } from './dto/update-stock.dto';
 
 @Injectable()
 export class StockService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private menuService: MenuService,
+  ) {}
 
   async create(createStockDto: CreateStockDto) {
-    return 'This action adds a new stock';
+    return this.prisma.stock.create({ data: createStockDto });
   }
 
   async findAll() {
-    return `This action returns all stock`;
+    return this.prisma.stock.findMany();
+  }
+
+  async findProductInBase(product_id: number, base_id: number) {
+    return this.prisma.stock.findMany({
+      where: { product_id: product_id, base_id: base_id },
+    });
   }
 
   async findOne(id: number) {
-    return `This action returns a #${id} stock`;
+    return this.prisma.stock.findUnique({ where: { id: id } });
   }
 
   async update(id: number, updateStockDto: UpdateStockDto) {
-    return `This action updates a #${id} stock`;
+    return this.prisma.stock.update({
+      where: { id: id },
+      data: updateStockDto,
+    });
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} stock`;
+    return this.prisma.stock.delete({ where: { id: id } });
   }
 }
