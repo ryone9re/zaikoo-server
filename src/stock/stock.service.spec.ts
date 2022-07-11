@@ -206,7 +206,7 @@ describe('StockService', () => {
       ...createFromMenuTest1Req,
       ...additionalData,
     };
-    createFromMenuResult1 = await service.createFromMenu(
+    createFromMenuResult1 = await service.createFromStock(
       createFromMenuTest1Req,
     );
     expect(createFromMenuResult1).toEqual(createFromMenuTest1Res);

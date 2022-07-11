@@ -1,8 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpCode,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
+import { Stock } from '@prisma/client';
 
 import { MenuService } from './../menu/menu.service';
 import { PrismaService } from './../prisma.service';
-import { CreateStockFromMenuDto } from './dto/create-stock-from-menu.dto';
 import { CreateStockDto } from './dto/create-stock.dto';
 import { UpdateStockDto } from './dto/update-stock.dto';
 
@@ -15,6 +20,65 @@ export class StockService {
 
   async create(createStockDto: CreateStockDto) {
     return this.prisma.stock.create({ data: createStockDto });
+  }
+
+  #compareRequiredToStock(required: number, stock: Stock[]) {
+    const stock_quantities = stock.map((v) => v.stock_quantity);
+    const quantitySummary = stock_quantities.reduce((a, x) => a + x);
+    return required >= quantitySummary;
+  }
+
+  async #consumeStock(used: number, stock: Stock[]) {
+    let i = 0;
+    if (used < stock[0].stock_quantity) {
+      return this.update(stock[0].id, {
+        stock_quantity: stock[0].stock_quantity - used,
+      });
+    }
+    if (used === stock[0].stock_quantity) {
+      return this.remove(stock[0].id);
+    }
+    for (i = 0; 0 < used && used >= stock[i].stock_quantity; i++) {
+      used = used - stock[i].stock_quantity;
+      try {
+        await this.remove(stock[i].id);
+      } catch (r) {
+        return new Promise(() => {
+          throw new BadRequestException('Remove stock error');
+        });
+      }
+    }
+    if (used !== 0) {
+      return this.update(stock[i].id, {
+        stock_quantity: stock[i].stock_quantity - used,
+      });
+    }
+  }
+
+  async createStockFromMenu(createStockDto: CreateStockDto) {
+    const menus = await this.menuService.findMenuInBaseWithStock(
+      createStockDto,
+    );
+    if (menus.length === 0) return new BadRequestException('No menu');
+    menus.forEach((v) => {
+      if (
+        !this.#compareRequiredToStock(
+          v.required_number,
+          v.required_product.stock,
+        )
+      )
+        return new BadRequestException('No stock');
+    });
+    const created = await this.create(createStockDto);
+    // TODO 使った商品を在庫からへらす
+    for await (const m of menus) {
+      try {
+        await this.#consumeStock(m.required_number, m.required_product.stock);
+      } catch (e) {
+        return new BadRequestException('Stock consume error');
+      }
+    }
+    return created;
   }
 
   async findAll() {

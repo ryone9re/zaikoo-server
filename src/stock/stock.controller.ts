@@ -21,6 +21,11 @@ export class StockController {
     return this.stockService.create(createStockDto);
   }
 
+  @Post('fromMenu')
+  createFromMenu(@Body() createStockDto: CreateStockDto) {
+    return this.stockService.createStockFromMenu(createStockDto);
+  }
+
   @Get()
   findAll() {
     return this.stockService.findAll();
