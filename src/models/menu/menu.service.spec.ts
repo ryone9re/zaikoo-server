@@ -2,7 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Product } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 
-import { PrismaService } from './../prisma.service';
+import { PrismaService } from '../../prisma.service';
+
 import { MenuService } from './menu.service';
 
 describe('MenuService', () => {

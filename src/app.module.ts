@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { CategoryModule } from './category/category.module';
-import { MenuModule } from './menu/menu.module';
-import { OfficeModule } from './office/office.module';
-import { ProductModule } from './product/product.module';
-import { StockModule } from './stock/stock.module';
-import { TaxRatesModule } from './tax-rates/tax-rates.module';
+import { AuthModule } from './models/auth/auth.module';
+import { CategoryModule } from './models/category/category.module';
+import { MenuModule } from './models/menu/menu.module';
+import { OfficeModule } from './models/office/office.module';
+import { ProductModule } from './models/product/product.module';
+import { StockModule } from './models/stock/stock.module';
+import { TaxRatesModule } from './models/tax-rates/tax-rates.module';
 
 @Module({
   imports: [
