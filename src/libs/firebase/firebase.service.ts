@@ -16,7 +16,7 @@ export class FirebaseService {
     }
   }
 
-  getAuth = (): firebase.auth.Auth => {
+  getAuth(): firebase.auth.Auth {
     return this.firebaseApp.auth();
-  };
+  }
 }
