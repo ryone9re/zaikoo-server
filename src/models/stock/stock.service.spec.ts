@@ -8,7 +8,8 @@ import {
 } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 
-import { PrismaService } from './../../prisma.service';
+import { PrismaService } from '../../libs/prisma/prisma.service';
+
 import { Stock } from './entities/stock.entity';
 import { StockService } from './stock.service';
 

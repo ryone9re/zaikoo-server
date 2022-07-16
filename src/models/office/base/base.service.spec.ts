@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { PrismaService } from '../../../prisma.service';
+import { PrismaService } from '../../../libs/prisma/prisma.service';
 
 import { BaseService } from './base.service';
 import { CreateBaseDto } from './dto/create-base.dto';
