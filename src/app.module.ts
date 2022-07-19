@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './models/auth/auth.module';
+import { AuthModule } from './guard/auth/auth.module';
 import { CategoryModule } from './models/category/category.module';
 import { MenuModule } from './models/menu/menu.module';
 import { OfficeModule } from './models/office/office.module';
