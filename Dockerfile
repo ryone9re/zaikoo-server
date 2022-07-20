@@ -48,6 +48,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --only=production && npm run build
+RUN npm install ci && npm run build
 
 ENTRYPOINT ["npm", "run", "start:prod"]
