@@ -46,8 +46,6 @@ ENV FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL ${FIREBASE_SERVICE_ACCOUNT_CLI
 
 WORKDIR /app
 
-ENV PATH /app/node_modules/.bin:$PATH ${PATH /app/node_modules/.bin:$PATH}
-
 COPY . .
 
 RUN npm install --only=production && npm run build
