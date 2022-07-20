@@ -1,6 +1,6 @@
 {
-  "name": "warehouse-manager",
-  "version": "0.0.1",
+  "name": "zaikos-server",
+  "version": "1.0.0",
   "description": "",
   "author": "ryone9re",
   "private": true,
@@ -9,7 +9,6 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "g": "npx nest g",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
