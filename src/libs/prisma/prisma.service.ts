@@ -1,8 +1,19 @@
-import { Injectable, INestApplication, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  INestApplication,
+  OnModuleInit,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
+  constructor() {
+    super({
+      rejectOnNotFound: () => new NotFoundException(),
+    });
+  }
+
   async onModuleInit() {
     await this.$connect();
   }

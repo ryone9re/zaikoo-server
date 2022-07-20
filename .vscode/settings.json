@@ -1,5 +1,6 @@
 {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "editor.detectIndentation": true
+    "editor.detectIndentation": true,
+    "jest.autoRun": "off"
 }
