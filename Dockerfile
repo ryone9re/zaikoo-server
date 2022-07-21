@@ -6,7 +6,7 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY prisma ./prisma
 RUN npm ci
-RUN npm prisma generate
+RUN npx prisma generate
 COPY . .
 RUN npm run build
 
