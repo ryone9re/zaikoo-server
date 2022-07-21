@@ -12,6 +12,7 @@ import { PrismaService } from './libs/prisma/prisma.service';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
   const config = new DocumentBuilder()
