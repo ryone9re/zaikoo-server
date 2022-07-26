@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   ArrayNotEmpty,
   IsNotEmpty,
@@ -6,11 +7,13 @@ import {
 } from 'class-validator';
 
 class required {
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
   required_product_id: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
@@ -18,11 +21,13 @@ class required {
 }
 
 export class CreateMenuDto {
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
   request_product_id: number;
 
+  @ApiProperty({ type: [required] })
   @ArrayNotEmpty()
   requires: required[];
 }

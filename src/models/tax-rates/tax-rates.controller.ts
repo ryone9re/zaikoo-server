@@ -8,12 +8,14 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateTaxRateDto } from './dto/create-tax-rate.dto';
 import { UpdateTaxRateDto } from './dto/update-tax-rate.dto';
 import { TaxRatesService } from './tax-rates.service';
 
+@ApiTags('tax-rates')
 @Controller('api/tax-rates')
 export class TaxRatesController {
   constructor(private readonly taxRatesService: TaxRatesService) {}
