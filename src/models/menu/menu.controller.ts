@@ -8,12 +8,14 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { MenuService } from './menu.service';
 
+@ApiTags('menu')
 @Controller('/api/menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}

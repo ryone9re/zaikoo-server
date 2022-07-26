@@ -8,12 +8,14 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { SupplierService } from './supplier.service';
 
+@ApiTags('office/supplier')
 @Controller('api/office/supplier')
 export class SupplierController {
   constructor(private readonly supplierService: SupplierService) {}
