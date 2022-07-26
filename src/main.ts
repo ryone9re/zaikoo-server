@@ -5,7 +5,6 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
-import basicAuth from 'express-basic-auth';
 
 import { AppModule } from './app.module';
 import { PrismaService } from './libs/prisma/prisma.service';
@@ -22,15 +21,6 @@ async function bootstrap() {
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
 
-  app.use(
-    ['/docs', '/docs-json'],
-    basicAuth({
-      challenge: true,
-      users: {
-        [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
-      },
-    }),
-  );
   const config = new DocumentBuilder()
     .setTitle('zaikos backend')
     .setDescription('zaikos backend')
