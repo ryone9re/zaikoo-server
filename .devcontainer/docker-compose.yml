@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   warehouse_manager:
-    container_name: warehouse_manager
+    container_name: zaikos-server
     build:
       context: .
       dockerfile: Dockerfile
