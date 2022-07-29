@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getServiceName(): string {
+  getServiceName() {
     return this.appService.getSeriviceName();
   }
 }
