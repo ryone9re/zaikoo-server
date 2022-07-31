@@ -24,35 +24,38 @@ export class StockController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetStockDto })
-  create(@Body() createStockDto: CreateStockDto) {
+  async create(@Body() createStockDto: CreateStockDto) {
     return this.stockService.create(createStockDto);
   }
 
   @Post('fromMenu')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetStockDto })
-  createFromMenu(@Body() createStockDto: CreateStockDto) {
+  async createFromMenu(@Body() createStockDto: CreateStockDto) {
     return this.stockService.createStockFromMenu(createStockDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: [GetStockDto] })
-  findAll() {
+  async findAll() {
     return this.stockService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetStockDto })
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.stockService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetStockDto })
-  update(@Param('id') id: string, @Body() updateStockDto: UpdateStockDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateStockDto: UpdateStockDto,
+  ) {
     return this.stockService.update(+id, updateStockDto);
   }
 

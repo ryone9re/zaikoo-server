@@ -24,28 +24,28 @@ export class SupplierController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetSupplierDto })
-  create(@Body() createSupplierDto: CreateSupplierDto) {
+  async create(@Body() createSupplierDto: CreateSupplierDto) {
     return this.supplierService.create(createSupplierDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: [GetSupplierDto] })
-  findAll() {
+  async findAll() {
     return this.supplierService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetSupplierDto })
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.supplierService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetSupplierDto })
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateSupplierDto: UpdateSupplierDto,
   ) {
@@ -55,7 +55,7 @@ export class SupplierController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetSupplierDto })
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.supplierService.remove(+id);
   }
 }

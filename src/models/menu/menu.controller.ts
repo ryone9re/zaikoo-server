@@ -24,42 +24,42 @@ export class MenuController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetMenuDto })
-  create(@Body() createMenuDto: CreateMenuDto) {
+  async create(@Body() createMenuDto: CreateMenuDto) {
     return this.menuService.createMenu(createMenuDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: [GetMenuDto] })
-  findAll() {
+  async findAll() {
     return this.menuService.findMenuAll();
   }
 
   @Get(':request_product_id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetMenuDto })
-  findMenu(@Param('request_product_id') request_product_id: number) {
+  async findMenu(@Param('request_product_id') request_product_id: number) {
     return this.menuService.findMenu(request_product_id);
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetMenuDto })
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.menuService.findMenuOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetMenuDto })
-  update(@Param('id') id: string, @Body() updateMenuDto: UpdateMenuDto) {
+  async update(@Param('id') id: string, @Body() updateMenuDto: UpdateMenuDto) {
     return this.menuService.update(+id, updateMenuDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetMenuDto })
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.menuService.remove(+id);
   }
 }

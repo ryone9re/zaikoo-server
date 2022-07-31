@@ -24,35 +24,35 @@ export class BaseController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetBaseDto })
-  create(@Body() createBaseDto: CreateBaseDto) {
+  async create(@Body() createBaseDto: CreateBaseDto) {
     return this.baseService.create(createBaseDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
   @ApiResponse({ type: [GetBaseDto] })
-  findAll() {
+  async findAll() {
     return this.baseService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetBaseDto })
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.baseService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetBaseDto })
-  update(@Param('id') id: string, @Body() updateBaseDto: UpdateBaseDto) {
+  async update(@Param('id') id: string, @Body() updateBaseDto: UpdateBaseDto) {
     return this.baseService.update(+id, updateBaseDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiResponse({ type: GetBaseDto })
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.baseService.remove(+id);
   }
 }
