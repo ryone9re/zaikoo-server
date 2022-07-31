@@ -8,7 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOAuth2,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CategoryService } from './category.service';
@@ -21,6 +27,7 @@ import {
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @ApiTags('category')
+@ApiOAuth2(['all:all'])
 @Controller('api/category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
@@ -28,6 +35,7 @@ export class CategoryController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: GetCategoryDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async create(
     @Body()
     createCategoryDto: CreateCategoryDto,
@@ -38,6 +46,7 @@ export class CategoryController {
   @Get()
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetCategoryDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findAll() {
     return this.categoryService.findCategoryAll();
   }
@@ -45,6 +54,7 @@ export class CategoryController {
   @Get('parent')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetParentCategoryDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findParentAll() {
     return this.categoryService.findParentAll();
   }
@@ -52,6 +62,7 @@ export class CategoryController {
   @Get('parent/:id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetParentCategoryDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findParentById(@Param('id') id: string) {
     return this.categoryService.findParent({ id: +id });
   }
@@ -59,6 +70,7 @@ export class CategoryController {
   @Delete('parent/:id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetParentCategoryDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async removeParent(@Param('id') id: string) {
     return this.categoryService.removeParent(+id);
   }
@@ -66,6 +78,7 @@ export class CategoryController {
   @Get('child')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetChildCategoryDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findChildAll() {
     return this.categoryService.findChildAll();
   }
@@ -73,6 +86,7 @@ export class CategoryController {
   @Get('child/:id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetChildCategoryDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findChildById(@Param('id') id: string) {
     return this.categoryService.findChild({ id: +id });
   }
@@ -80,6 +94,7 @@ export class CategoryController {
   @Patch('child/:id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetChildCategoryDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async updateChild(@Param('id') id: string, @Body() body: UpdateCategoryDto) {
     return this.categoryService.updateChild(+id, body);
   }
@@ -87,6 +102,7 @@ export class CategoryController {
   @Delete('child/:id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetChildCategoryDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async removeChild(@Param('id') id: string) {
     return this.categoryService.removeChild(+id);
   }

@@ -8,7 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOAuth2,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { BaseService } from './base.service';
@@ -17,6 +23,7 @@ import { GetBaseDto } from './dto/get-base.dto';
 import { UpdateBaseDto } from './dto/update-base.dto';
 
 @ApiTags('office/base')
+@ApiOAuth2(['all:all'])
 @Controller('/api/office/base')
 export class BaseController {
   constructor(private readonly baseService: BaseService) {}
@@ -24,6 +31,7 @@ export class BaseController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: GetBaseDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async create(@Body() createBaseDto: CreateBaseDto) {
     return this.baseService.create(createBaseDto);
   }
@@ -31,6 +39,7 @@ export class BaseController {
   @Get()
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetBaseDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findAll() {
     return this.baseService.findAll();
   }
@@ -38,6 +47,7 @@ export class BaseController {
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetBaseDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.baseService.findOne(+id);
   }
@@ -45,6 +55,7 @@ export class BaseController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetBaseDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async update(@Param('id') id: string, @Body() updateBaseDto: UpdateBaseDto) {
     return this.baseService.update(+id, updateBaseDto);
   }
@@ -52,6 +63,7 @@ export class BaseController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetBaseDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async remove(@Param('id') id: string) {
     return this.baseService.remove(+id);
   }
