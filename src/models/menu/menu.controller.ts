@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -23,43 +23,43 @@ export class MenuController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetMenuDto })
-  create(@Body() createMenuDto: CreateMenuDto) {
+  @ApiOkResponse({ type: GetMenuDto })
+  async create(@Body() createMenuDto: CreateMenuDto) {
     return this.menuService.createMenu(createMenuDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: [GetMenuDto] })
-  findAll() {
+  @ApiOkResponse({ type: [GetMenuDto] })
+  async findAll() {
     return this.menuService.findMenuAll();
   }
 
   @Get(':request_product_id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetMenuDto })
-  findMenu(@Param('request_product_id') request_product_id: number) {
+  @ApiOkResponse({ type: GetMenuDto })
+  async findMenu(@Param('request_product_id') request_product_id: number) {
     return this.menuService.findMenu(request_product_id);
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetMenuDto })
-  findOne(@Param('id') id: string) {
+  @ApiOkResponse({ type: GetMenuDto })
+  async findOne(@Param('id') id: string) {
     return this.menuService.findMenuOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetMenuDto })
-  update(@Param('id') id: string, @Body() updateMenuDto: UpdateMenuDto) {
+  @ApiOkResponse({ type: GetMenuDto })
+  async update(@Param('id') id: string, @Body() updateMenuDto: UpdateMenuDto) {
     return this.menuService.update(+id, updateMenuDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetMenuDto })
-  remove(@Param('id') id: string) {
+  @ApiOkResponse({ type: GetMenuDto })
+  async remove(@Param('id') id: string) {
     return this.menuService.remove(+id);
   }
 }

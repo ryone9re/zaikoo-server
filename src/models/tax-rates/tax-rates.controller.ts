@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateTaxRateDto } from './dto/create-tax-rate.dto';
@@ -23,36 +23,39 @@ export class TaxRatesController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetTaxRateDto })
-  create(@Body() createTaxRateDto: CreateTaxRateDto) {
+  @ApiOkResponse({ type: GetTaxRateDto })
+  async create(@Body() createTaxRateDto: CreateTaxRateDto) {
     return this.taxRatesService.create(createTaxRateDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: [GetTaxRateDto] })
-  findAll() {
+  @ApiOkResponse({ type: [GetTaxRateDto] })
+  async findAll() {
     return this.taxRatesService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetTaxRateDto })
-  findOne(@Param('id') id: string) {
+  @ApiOkResponse({ type: GetTaxRateDto })
+  async findOne(@Param('id') id: string) {
     return this.taxRatesService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetTaxRateDto })
-  update(@Param('id') id: string, @Body() updateTaxRateDto: UpdateTaxRateDto) {
+  @ApiOkResponse({ type: GetTaxRateDto })
+  async update(
+    @Param('id') id: string,
+    @Body() updateTaxRateDto: UpdateTaxRateDto,
+  ) {
     return this.taxRatesService.update(+id, updateTaxRateDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetTaxRateDto })
-  remove(@Param('id') id: string) {
+  @ApiOkResponse({ type: GetTaxRateDto })
+  async remove(@Param('id') id: string) {
     return this.taxRatesService.remove(+id);
   }
 }

@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateStockDto } from './dto/create-stock.dto';
@@ -23,42 +23,45 @@ export class StockController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetStockDto })
-  create(@Body() createStockDto: CreateStockDto) {
+  @ApiOkResponse({ type: GetStockDto })
+  async create(@Body() createStockDto: CreateStockDto) {
     return this.stockService.create(createStockDto);
   }
 
   @Post('fromMenu')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetStockDto })
-  createFromMenu(@Body() createStockDto: CreateStockDto) {
+  @ApiOkResponse({ type: GetStockDto })
+  async createFromMenu(@Body() createStockDto: CreateStockDto) {
     return this.stockService.createStockFromMenu(createStockDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: [GetStockDto] })
-  findAll() {
+  @ApiOkResponse({ type: [GetStockDto] })
+  async findAll() {
     return this.stockService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetStockDto })
-  findOne(@Param('id') id: string) {
+  @ApiOkResponse({ type: GetStockDto })
+  async findOne(@Param('id') id: string) {
     return this.stockService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetStockDto })
-  update(@Param('id') id: string, @Body() updateStockDto: UpdateStockDto) {
+  @ApiOkResponse({ type: GetStockDto })
+  async update(
+    @Param('id') id: string,
+    @Body() updateStockDto: UpdateStockDto,
+  ) {
     return this.stockService.update(+id, updateStockDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetStockDto })
+  @ApiOkResponse({ type: GetStockDto })
   remove(@Param('id') id: string) {
     return this.stockService.remove(+id);
   }
