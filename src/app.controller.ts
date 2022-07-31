@@ -1,9 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
 
 import { AppService } from './app.service';
 
 class ServiceName {
+  @ApiProperty()
   serviceName: string;
 }
 

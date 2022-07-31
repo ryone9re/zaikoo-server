@@ -8,7 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOAuth2,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateStockDto } from './dto/create-stock.dto';
@@ -17,6 +23,7 @@ import { UpdateStockDto } from './dto/update-stock.dto';
 import { StockService } from './stock.service';
 
 @ApiTags('stock')
+@ApiOAuth2(['all:all'])
 @Controller('/api/stock')
 export class StockController {
   constructor(private readonly stockService: StockService) {}
@@ -24,6 +31,7 @@ export class StockController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: GetStockDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async create(@Body() createStockDto: CreateStockDto) {
     return this.stockService.create(createStockDto);
   }
@@ -31,6 +39,7 @@ export class StockController {
   @Post('fromMenu')
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: GetStockDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async createFromMenu(@Body() createStockDto: CreateStockDto) {
     return this.stockService.createStockFromMenu(createStockDto);
   }
@@ -38,6 +47,7 @@ export class StockController {
   @Get()
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetStockDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findAll() {
     return this.stockService.findAll();
   }
@@ -45,6 +55,7 @@ export class StockController {
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetStockDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.stockService.findOne(+id);
   }
@@ -52,6 +63,7 @@ export class StockController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetStockDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async update(
     @Param('id') id: string,
     @Body() updateStockDto: UpdateStockDto,
@@ -62,6 +74,7 @@ export class StockController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetStockDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   remove(@Param('id') id: string) {
     return this.stockService.remove(+id);
   }

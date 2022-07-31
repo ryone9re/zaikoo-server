@@ -8,7 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOAuth2,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -17,6 +23,7 @@ import { UpdateMenuDto } from './dto/update-menu.dto';
 import { MenuService } from './menu.service';
 
 @ApiTags('menu')
+@ApiOAuth2(['all:all'])
 @Controller('/api/menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
@@ -24,6 +31,7 @@ export class MenuController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: GetMenuDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async create(@Body() createMenuDto: CreateMenuDto) {
     return this.menuService.createMenu(createMenuDto);
   }
@@ -31,6 +39,7 @@ export class MenuController {
   @Get()
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetMenuDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findAll() {
     return this.menuService.findMenuAll();
   }
@@ -38,6 +47,7 @@ export class MenuController {
   @Get(':request_product_id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetMenuDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findMenu(@Param('request_product_id') request_product_id: number) {
     return this.menuService.findMenu(request_product_id);
   }
@@ -45,6 +55,7 @@ export class MenuController {
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetMenuDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.menuService.findMenuOne(+id);
   }
@@ -52,6 +63,7 @@ export class MenuController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetMenuDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async update(@Param('id') id: string, @Body() updateMenuDto: UpdateMenuDto) {
     return this.menuService.update(+id, updateMenuDto);
   }
@@ -59,6 +71,7 @@ export class MenuController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetMenuDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async remove(@Param('id') id: string) {
     return this.menuService.remove(+id);
   }

@@ -8,7 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOAuth2,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -17,6 +23,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
 
 @ApiTags('product')
+@ApiOAuth2(['all:all'])
 @Controller('/api/product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
@@ -24,6 +31,7 @@ export class ProductController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: GetProductDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
@@ -31,6 +39,7 @@ export class ProductController {
   @Get()
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetProductDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findAll() {
     return this.productService.findAll();
   }
@@ -38,6 +47,7 @@ export class ProductController {
   @Get(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetProductDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.productService.findOne(+id);
   }
@@ -45,6 +55,7 @@ export class ProductController {
   @Patch(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetProductDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async update(
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
@@ -55,6 +66,7 @@ export class ProductController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: GetProductDto })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async remove(@Param('id') id: string) {
     return this.productService.remove(+id);
   }
