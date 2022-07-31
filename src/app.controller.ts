@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AppService } from './app.service';
 
@@ -13,7 +13,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @ApiResponse({ type: ServiceName })
+  @ApiOkResponse({ type: ServiceName })
   async getServiceName() {
     return this.appService.getSeriviceName();
   }

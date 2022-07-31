@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -23,28 +23,28 @@ export class ProductController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetProductDto })
+  @ApiOkResponse({ type: GetProductDto })
   async create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: [GetProductDto] })
+  @ApiOkResponse({ type: [GetProductDto] })
   async findAll() {
     return this.productService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetProductDto })
+  @ApiOkResponse({ type: GetProductDto })
   async findOne(@Param('id') id: string) {
     return this.productService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetProductDto })
+  @ApiOkResponse({ type: GetProductDto })
   async update(
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
@@ -54,7 +54,7 @@ export class ProductController {
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetProductDto })
+  @ApiOkResponse({ type: GetProductDto })
   async remove(@Param('id') id: string) {
     return this.productService.remove(+id);
   }

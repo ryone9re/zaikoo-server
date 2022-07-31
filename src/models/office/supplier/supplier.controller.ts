@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
@@ -23,28 +23,28 @@ export class SupplierController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetSupplierDto })
+  @ApiOkResponse({ type: GetSupplierDto })
   async create(@Body() createSupplierDto: CreateSupplierDto) {
     return this.supplierService.create(createSupplierDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: [GetSupplierDto] })
+  @ApiOkResponse({ type: [GetSupplierDto] })
   async findAll() {
     return this.supplierService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetSupplierDto })
+  @ApiOkResponse({ type: GetSupplierDto })
   async findOne(@Param('id') id: string) {
     return this.supplierService.findOne(+id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetSupplierDto })
+  @ApiOkResponse({ type: GetSupplierDto })
   async update(
     @Param('id') id: string,
     @Body() updateSupplierDto: UpdateSupplierDto,
@@ -54,7 +54,7 @@ export class SupplierController {
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @ApiResponse({ type: GetSupplierDto })
+  @ApiOkResponse({ type: GetSupplierDto })
   async remove(@Param('id') id: string) {
     return this.supplierService.remove(+id);
   }
