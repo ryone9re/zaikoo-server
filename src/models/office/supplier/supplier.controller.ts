@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
@@ -23,7 +23,7 @@ export class SupplierController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetSupplierDto })
+  @ApiCreatedResponse({ type: GetSupplierDto })
   async create(@Body() createSupplierDto: CreateSupplierDto) {
     return this.supplierService.create(createSupplierDto);
   }

@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateTaxRateDto } from './dto/create-tax-rate.dto';
@@ -23,7 +23,7 @@ export class TaxRatesController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetTaxRateDto })
+  @ApiCreatedResponse({ type: GetTaxRateDto })
   async create(@Body() createTaxRateDto: CreateTaxRateDto) {
     return this.taxRatesService.create(createTaxRateDto);
   }

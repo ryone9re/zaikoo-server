@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -23,7 +23,7 @@ export class MenuController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetMenuDto })
+  @ApiCreatedResponse({ type: GetMenuDto })
   async create(@Body() createMenuDto: CreateMenuDto) {
     return this.menuService.createMenu(createMenuDto);
   }

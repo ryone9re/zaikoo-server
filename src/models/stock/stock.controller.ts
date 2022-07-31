@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateStockDto } from './dto/create-stock.dto';
@@ -23,14 +23,14 @@ export class StockController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetStockDto })
+  @ApiCreatedResponse({ type: GetStockDto })
   async create(@Body() createStockDto: CreateStockDto) {
     return this.stockService.create(createStockDto);
   }
 
   @Post('fromMenu')
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetStockDto })
+  @ApiCreatedResponse({ type: GetStockDto })
   async createFromMenu(@Body() createStockDto: CreateStockDto) {
     return this.stockService.createStockFromMenu(createStockDto);
   }

@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { BaseService } from './base.service';
@@ -23,7 +23,7 @@ export class BaseController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetBaseDto })
+  @ApiCreatedResponse({ type: GetBaseDto })
   async create(@Body() createBaseDto: CreateBaseDto) {
     return this.baseService.create(createBaseDto);
   }

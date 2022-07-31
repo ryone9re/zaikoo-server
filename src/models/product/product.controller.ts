@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -23,7 +23,7 @@ export class ProductController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiOkResponse({ type: GetProductDto })
+  @ApiCreatedResponse({ type: GetProductDto })
   async create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
