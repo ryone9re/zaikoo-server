@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -27,7 +27,8 @@ import {
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @ApiTags('category')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('api/category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}

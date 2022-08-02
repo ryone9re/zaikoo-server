@@ -18,7 +18,9 @@ export class AuthGuard implements CanActivate {
     const tok = req.headers[AUTHORIZATION_HEADER_KEY] as string | undefined;
 
     try {
-      req['user'] = await this.authService.validateUser(tok);
+      req['user'] = await this.authService.validateUser(
+        this.authService.removeBearerKeyword(tok),
+      );
       return true;
     } catch (e) {
       throw new UnauthorizedException('Unauthorized');

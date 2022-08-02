@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -23,7 +23,8 @@ import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { SupplierService } from './supplier.service';
 
 @ApiTags('office/supplier')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('api/office/supplier')
 export class SupplierController {
   constructor(private readonly supplierService: SupplierService) {}

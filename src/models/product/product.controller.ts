@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -23,7 +23,8 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
 
 @ApiTags('product')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('/api/product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}

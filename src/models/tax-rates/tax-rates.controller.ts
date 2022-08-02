@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -23,7 +23,8 @@ import { UpdateTaxRateDto } from './dto/update-tax-rate.dto';
 import { TaxRatesService } from './tax-rates.service';
 
 @ApiTags('tax-rates')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('api/tax-rates')
 export class TaxRatesController {
   constructor(private readonly taxRatesService: TaxRatesService) {}

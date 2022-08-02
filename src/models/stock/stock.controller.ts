@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -23,7 +23,8 @@ import { UpdateStockDto } from './dto/update-stock.dto';
 import { StockService } from './stock.service';
 
 @ApiTags('stock')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('/api/stock')
 export class StockController {
   constructor(private readonly stockService: StockService) {}

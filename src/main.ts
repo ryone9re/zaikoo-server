@@ -26,19 +26,20 @@ async function bootstrap() {
     .setTitle('zaikos server')
     .setDescription('zaikos server')
     .setVersion('1.0')
-    .addOAuth2({
-      type: 'oauth2',
-      flows: {
-        authorizationCode: {
-          authorizationUrl: process.env.FIREBASE_SERVICE_ACCOUNT_AUTH_URI,
-          tokenUrl: process.env.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI,
-          scopes: {
-            'https://www.googleapis.com/auth/contacts.readonly':
-              'OAuth readonly scopes',
-          },
-        },
-      },
-    })
+    .addBearerAuth()
+    // .addOAuth2({
+    //   type: 'oauth2',
+    //   flows: {
+    //     authorizationCode: {
+    //       authorizationUrl: process.env.FIREBASE_SERVICE_ACCOUNT_AUTH_URI,
+    //       tokenUrl: process.env.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI,
+    //       scopes: {
+    //         'https://www.googleapis.com/auth/contacts.readonly':
+    //           'OAuth readonly scopes',
+    //       },
+    //     },
+    //   },
+    // })
     .build();
   const options: SwaggerDocumentOptions = {
     operationIdFactory: (_: string, methodKey: string) => methodKey,
