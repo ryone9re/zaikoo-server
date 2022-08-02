@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -23,7 +23,8 @@ import { UpdateMenuDto } from './dto/update-menu.dto';
 import { MenuService } from './menu.service';
 
 @ApiTags('menu')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('/api/menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}

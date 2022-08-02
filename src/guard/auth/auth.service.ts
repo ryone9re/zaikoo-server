@@ -23,6 +23,12 @@ admin.initializeApp(firebaseParams);
 
 @Injectable()
 export class AuthService {
+  removeBearerKeyword(keyword: string): string {
+    const s = keyword.slice(0, 7);
+    if (s === 'Bearer ' || s === 'bearer ') return keyword.slice(7);
+    else return keyword;
+  }
+
   async validateUser(token: string): Promise<any> {
     if (!token) throw new UnauthorizedException('Unauthorized');
 

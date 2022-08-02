@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
-  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -23,7 +23,8 @@ import { GetBaseDto } from './dto/get-base.dto';
 import { UpdateBaseDto } from './dto/update-base.dto';
 
 @ApiTags('office/base')
-@ApiOAuth2(['all:all'])
+// @ApiOAuth2(['all:all'])
+@ApiBearerAuth()
 @Controller('/api/office/base')
 export class BaseController {
   constructor(private readonly baseService: BaseService) {}
