@@ -66,7 +66,6 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --add-cloudsql-instances $DB_INSTANCE \
-            --min-instances=1 \
             --quiet \
             --set-env-vars="DATABASE_URL"="${{ secrets.DATABASE_URL }}" \
             --set-env-vars="HOST_URI"="${{ secrets.HOST_URI }}" \
