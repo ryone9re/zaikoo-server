@@ -1,8 +1,8 @@
 import {
   BadRequestException,
-  HttpCode,
-  HttpStatus,
   Injectable,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { Stock } from '@prisma/client';
 
@@ -10,6 +10,7 @@ import { PrismaService } from '../../libs/prisma/prisma.service';
 
 import { MenuService } from './../menu/menu.service';
 import { CreateStockDto } from './dto/create-stock.dto';
+import { DeliverStockDto } from './dto/deliver-stock.dto';
 import { UpdateStockDto } from './dto/update-stock.dto';
 
 @Injectable()
@@ -105,5 +106,20 @@ export class StockService {
 
   async remove(id: number) {
     return this.prisma.stock.delete({ where: { id: id } });
+  }
+
+  async deliverTo(deliverStockDto: DeliverStockDto) {
+    try {
+      const stock = await this.findOne(deliverStockDto.stock_id);
+      if (stock.stock_quantity < deliverStockDto.quantity)
+        throw new HttpException(
+          '必要な量の在庫がありません',
+          HttpStatus.BAD_REQUEST,
+        );
+      // TODO 出荷DBに登録
+      return;
+    } catch (e) {
+      return e;
+    }
   }
 }
