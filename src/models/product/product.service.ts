@@ -30,8 +30,11 @@ export class ProductService {
       part_number: updateProductDto.part_number,
       reorder_point: updateProductDto.reorder_point,
     };
-    if (updateProductDto.category_id) {
-      data.category = { update: { id: updateProductDto.category_id } };
+    if (updateProductDto.category1_id) {
+      data.category1 = { update: { id: updateProductDto.category1_id } };
+    }
+    if (updateProductDto.category2_id) {
+      data.category2 = { update: { id: updateProductDto.category2_id } };
     }
     if (updateProductDto.tax_id) {
       data.tax = { update: { id: updateProductDto.tax_id } };
