@@ -38,3 +38,14 @@ export class GetProductDto implements Product {
   @ApiProperty()
   updated_at: Date;
 }
+
+export class GetProductNameListDto {
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  description: string;
+}

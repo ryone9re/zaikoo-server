@@ -21,6 +21,10 @@ export class BaseService {
     return this.prisma.base.findUnique({ where: { id: id } });
   }
 
+  async findAllByName() {
+    return this.prisma.base.findMany({ select: { id: true, base_name: true } });
+  }
+
   async update(id: number, updateBaseDto: UpdateBaseDto) {
     return this.prisma.base.update({ where: { id: id }, data: updateBaseDto });
   }

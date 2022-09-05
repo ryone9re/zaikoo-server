@@ -32,3 +32,11 @@ export class GetSupplierDto implements Supplier {
   @ApiProperty()
   updated_at: Date;
 }
+
+export class GetSupplierNameListDto {
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty()
+  supplier_name: string;
+}

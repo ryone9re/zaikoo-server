@@ -22,6 +22,12 @@ export class ProductService {
     return this.prisma.product.findUnique({ where: { id: id } });
   }
 
+  async findAllByName() {
+    return this.prisma.product.findMany({
+      select: { id: true, name: true, description: true },
+    });
+  }
+
   async update(id: number, updateProductDto: UpdateProductDto) {
     const data: Prisma.ProductUpdateInput = {
       denomination: updateProductDto.denomination,
