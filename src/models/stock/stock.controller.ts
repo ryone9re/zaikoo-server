@@ -37,13 +37,13 @@ export class StockController {
     return this.stockService.create(createStockDto);
   }
 
-  @Post('fromMenu')
-  @UseGuards(AuthGuard)
-  @ApiCreatedResponse({ type: GetStockDto })
-  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
-  async createFromMenu(@Body() createStockDto: CreateStockDto) {
-    return this.stockService.createStockFromMenu(createStockDto);
-  }
+  // @Post('fromMenu')
+  // @UseGuards(AuthGuard)
+  // @ApiCreatedResponse({ type: GetStockDto })
+  // @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
+  // async createFromMenu(@Body() createStockDto: CreateStockDto) {
+  //   return this.stockService.createStockFromMenu(createStockDto);
+  // }
 
   @Get()
   @UseGuards(AuthGuard)

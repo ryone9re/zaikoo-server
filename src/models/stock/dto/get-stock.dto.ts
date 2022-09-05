@@ -21,6 +21,12 @@ export class GetStockDto implements Stock {
   selling_unit_price: number;
 
   @ApiProperty()
+  delivery_note_number: string;
+
+  @ApiProperty()
+  detail: string;
+
+  @ApiProperty()
   base_id: number;
 
   @ApiProperty()

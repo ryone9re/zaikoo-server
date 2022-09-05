@@ -19,7 +19,7 @@ import {
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { BaseService } from './base.service';
 import { CreateBaseDto } from './dto/create-base.dto';
-import { GetBaseDto } from './dto/get-base.dto';
+import { GetBaseDto, GetBaseNameListDto } from './dto/get-base.dto';
 import { UpdateBaseDto } from './dto/update-base.dto';
 
 @ApiTags('office/base')
@@ -51,6 +51,14 @@ export class BaseController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.baseService.findOne(+id);
+  }
+
+  @Get()
+  @UseGuards(AuthGuard)
+  @ApiOkResponse({ type: [GetBaseNameListDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
+  async findAllByName() {
+    return this.baseService.findAllByName();
   }
 
   @Patch(':id')

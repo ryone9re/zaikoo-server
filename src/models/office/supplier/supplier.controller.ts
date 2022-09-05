@@ -18,7 +18,7 @@ import {
 
 import { AuthGuard } from './../../../guard/auth/auth.guard';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
-import { GetSupplierDto } from './dto/get-supplier.dto';
+import { GetSupplierDto, GetSupplierNameListDto } from './dto/get-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 import { SupplierService } from './supplier.service';
 
@@ -51,6 +51,14 @@ export class SupplierController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.supplierService.findOne(+id);
+  }
+
+  @Get('name')
+  @UseGuards(AuthGuard)
+  @ApiOkResponse({ type: [GetSupplierNameListDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
+  async findAllByName() {
+    return this.supplierService.findAllByName();
   }
 
   @Patch(':id')

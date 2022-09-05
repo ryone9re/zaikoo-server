@@ -15,13 +15,19 @@ export class GetProductDto implements Product {
   description: string;
 
   @ApiProperty()
-  part_number: number;
+  part_number: string;
 
   @ApiProperty()
   reorder_point: number;
 
   @ApiProperty()
-  category_id: number;
+  memo: string;
+
+  @ApiProperty()
+  category1_id: number;
+
+  @ApiProperty()
+  category2_id: number;
 
   @ApiProperty()
   tax_id: number;
@@ -31,4 +37,15 @@ export class GetProductDto implements Product {
 
   @ApiProperty()
   updated_at: Date;
+}
+
+export class GetProductNameListDto {
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  description: string;
 }

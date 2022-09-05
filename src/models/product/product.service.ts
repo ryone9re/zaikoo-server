@@ -22,6 +22,12 @@ export class ProductService {
     return this.prisma.product.findUnique({ where: { id: id } });
   }
 
+  async findAllByName() {
+    return this.prisma.product.findMany({
+      select: { id: true, name: true, description: true },
+    });
+  }
+
   async update(id: number, updateProductDto: UpdateProductDto) {
     const data: Prisma.ProductUpdateInput = {
       denomination: updateProductDto.denomination,
@@ -30,8 +36,11 @@ export class ProductService {
       part_number: updateProductDto.part_number,
       reorder_point: updateProductDto.reorder_point,
     };
-    if (updateProductDto.category_id) {
-      data.category = { update: { id: updateProductDto.category_id } };
+    if (updateProductDto.category1_id) {
+      data.category1 = { update: { id: updateProductDto.category1_id } };
+    }
+    if (updateProductDto.category2_id) {
+      data.category2 = { update: { id: updateProductDto.category2_id } };
     }
     if (updateProductDto.tax_id) {
       data.tax = { update: { id: updateProductDto.tax_id } };

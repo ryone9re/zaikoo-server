@@ -19,10 +19,12 @@
 				"donjayamanne.githistory",
 				"eamodio.gitlens",
 				"oderwat.indent-rainbow",
-				"xabikos.javascriptsnippets",
+				"VisualStudioExptTeam.vscodeintellicode",
 				"christian-kohler.npm-intellisense",
 				"quicktype.quicktype",
 				"ionutvmi.path-autocomplete",
+				"Prisma.prisma",
+				"VisualStudioExptTeam.intellicode-api-usage-examples",
 				"esbenp.prettier-vscode"
 			]
 		}

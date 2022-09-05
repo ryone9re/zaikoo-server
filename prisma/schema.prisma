@@ -44,37 +44,55 @@ model Base {
   updated_at       DateTime @updatedAt
 }
 
+model Destination {
+  id            Int      @id @default(autoincrement())
+  base_name     String
+  // No hyphen
+  postal_code   String
+  address       String
+  // No hyphen
+  phone_number  String?
+  email_address String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
 model Stock {
-  id                  Int      @id @default(autoincrement())
-  product             Product  @relation(fields: [product_id], references: [id])
-  product_id          Int
-  supplier            Supplier @relation(fields: [supplier_id], references: [id])
-  supplier_id         Int
-  stock_quantity      Int
-  purchase_unit_price Int
-  selling_unit_price  Int?
-  base                Base     @relation(fields: [base_id], references: [id])
-  base_id             Int
-  created_at          DateTime @default(now())
-  updated_at          DateTime @updatedAt
+  id                   Int      @id @default(autoincrement())
+  product              Product  @relation(fields: [product_id], references: [id])
+  product_id           Int
+  supplier             Supplier @relation(fields: [supplier_id], references: [id])
+  supplier_id          Int
+  stock_quantity       Int
+  purchase_unit_price  Int
+  selling_unit_price   Int?
+  delivery_note_number String?
+  detail               String?
+  base                 Base     @relation(fields: [base_id], references: [id])
+  base_id              Int
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
 }
 
 model Product {
-  id               Int            @id @default(autoincrement())
+  id               Int             @id @default(autoincrement())
   denomination     String
   name             String
   description      String?
-  part_number      Int?
+  part_number      String?
   reorder_point    Int?
-  category         Child_category @relation(fields: [category_id], references: [id])
-  category_id      Int
-  tax              Tax_rate       @relation(fields: [tax_id], references: [id])
+  memo             String?
+  category1        Child_category  @relation(name: "category1", fields: [category1_id], references: [id])
+  category1_id     Int
+  category2        Child_category? @relation(name: "category2", fields: [category2_id], references: [id])
+  category2_id     Int?
+  tax              Tax_rate        @relation(fields: [tax_id], references: [id])
   tax_id           Int
   stock            Stock[]
-  request_product  Menu[]         @relation("RequestProduct")
-  required_product Menu[]         @relation("RequiredProduct")
-  created_at       DateTime       @default(now())
-  updated_at       DateTime       @updatedAt
+  request_product  Menu[]          @relation("RequestProduct")
+  required_product Menu[]          @relation("RequiredProduct")
+  created_at       DateTime        @default(now())
+  updated_at       DateTime        @updatedAt
 }
 
 model Menu {
@@ -103,9 +121,10 @@ model Child_category {
   parent     Parent_category @relation(fields: [parent_id], references: [id])
   parent_id  Int
   name       String
-  product    Product[]
   created_at DateTime        @default(now())
   updated_at DateTime        @updatedAt
+  category1  Product[]       @relation("category1")
+  category2  Product[]       @relation("category2")
 
   @@unique([parent_id, name])
 }

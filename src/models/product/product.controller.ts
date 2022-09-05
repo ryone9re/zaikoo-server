@@ -18,7 +18,7 @@ import {
 
 import { AuthGuard } from './../../guard/auth/auth.guard';
 import { CreateProductDto } from './dto/create-product.dto';
-import { GetProductDto } from './dto/get-product.dto';
+import { GetProductDto, GetProductNameListDto } from './dto/get-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductService } from './product.service';
 
@@ -51,6 +51,14 @@ export class ProductController {
   @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
   async findOne(@Param('id') id: string) {
     return this.productService.findOne(+id);
+  }
+
+  @Get('name')
+  @UseGuards(AuthGuard)
+  @ApiOkResponse({ type: [GetProductNameListDto] })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
+  async findAllByName() {
+    return this.productService.findAllByName();
   }
 
   @Patch(':id')

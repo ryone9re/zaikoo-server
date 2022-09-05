@@ -21,6 +21,12 @@ export class SupplierService {
     return this.prisma.supplier.findUnique({ where: { id: id } });
   }
 
+  async findAllByName() {
+    return this.prisma.supplier.findMany({
+      select: { id: true, supplier_name: true },
+    });
+  }
+
   async update(id: number, updateSupplierDto: UpdateSupplierDto) {
     const data = updateSupplierDto;
     if (typeof updateSupplierDto.division_name == undefined) {

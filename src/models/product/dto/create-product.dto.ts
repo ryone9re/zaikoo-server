@@ -18,18 +18,6 @@ export class CreateProductDto {
   @IsString()
   name: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
-  category_id: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
-  tax_id: number;
-
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
@@ -37,13 +25,36 @@ export class CreateProductDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsNumber()
+  @IsString()
   @IsPositive()
-  part_number?: number;
+  part_number?: string;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsNumber()
   @IsPositive()
   reorder_point?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  memo?: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  @IsPositive()
+  category1_id: number;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  category2_id?: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  @IsPositive()
+  tax_id: number;
 }

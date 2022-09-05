@@ -32,3 +32,11 @@ export class GetBaseDto implements Base {
   @ApiProperty()
   updated_at: Date;
 }
+
+export class GetBaseNameListDto {
+  @ApiProperty()
+  id: number;
+
+  @ApiProperty()
+  base_name: string;
+}
