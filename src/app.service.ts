@@ -5,8 +5,8 @@ export class ServiceName {
   @ApiProperty()
   serviceName: string;
 
-  constructor(readonly name: string) {
-    this.serviceName = name;
+  constructor(serviceName: string) {
+    this.serviceName = serviceName;
   }
 }
 
