@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './guard/auth/auth.module';
+import { AuthService } from './guard/auth/auth.service';
 import { CategoryModule } from './models/category/category.module';
 import { MenuModule } from './models/menu/menu.module';
 import { OfficeModule } from './models/office/office.module';
@@ -21,6 +22,6 @@ import { TaxRatesModule } from './models/tax-rates/tax-rates.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
