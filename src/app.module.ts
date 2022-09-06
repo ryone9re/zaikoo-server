@@ -22,6 +22,6 @@ import { TaxRatesModule } from './models/tax-rates/tax-rates.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService],
+  providers: [AppService],
 })
 export class AppModule {}
