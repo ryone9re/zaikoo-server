@@ -28,8 +28,8 @@ export class CheckAuth {
   @ApiProperty()
   authState: boolean;
 
-  constructor(readonly isAuth: boolean) {
-    this.authState = isAuth;
+  constructor(authState: boolean) {
+    this.authState = authState;
   }
 }
 
