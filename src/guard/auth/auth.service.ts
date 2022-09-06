@@ -3,7 +3,10 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 import admin from 'firebase-admin';
+
+const FIREBASE_COOKIE_KEY = '__fortressFirebaseSession';
 
 const firebaseParams = {
   type: process.env.FIREBASE_SERVICE_ACCOUNT_TYPE,
@@ -21,6 +24,15 @@ const firebaseParams = {
 
 admin.initializeApp(firebaseParams);
 
+export class CheckAuth {
+  @ApiProperty()
+  authState: boolean;
+
+  constructor(readonly isAuth: boolean) {
+    this.authState = isAuth;
+  }
+}
+
 @Injectable()
 export class AuthService {
   removeBearerKeyword(keyword: string): string {
@@ -37,6 +49,22 @@ export class AuthService {
       return user;
     } catch (e) {
       throw new HttpException('Forbidden', e);
+    }
+  }
+
+  async checkAuth(cookies: any) {
+    if (!(FIREBASE_COOKIE_KEY in cookies)) {
+      return new CheckAuth(false);
+    }
+
+    try {
+      const user = await admin
+        .auth()
+        .verifyIdToken(cookies[FIREBASE_COOKIE_KEY]);
+      if (user) return new CheckAuth(true);
+      return new CheckAuth(false);
+    } catch {
+      return new CheckAuth(false);
     }
   }
 }
