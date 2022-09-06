@@ -6,6 +6,7 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 
 import { AppModule } from './app.module';
 import { PrismaService } from './libs/prisma/prisma.service';
@@ -18,6 +19,7 @@ async function bootstrap() {
     allowedHeaders:
       'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   });
+  app.use(cookieParser());
 
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
