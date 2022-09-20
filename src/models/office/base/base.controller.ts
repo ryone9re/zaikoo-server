@@ -53,7 +53,7 @@ export class BaseController {
     return this.baseService.findOne(+id);
   }
 
-  @Get()
+  @Get('name')
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [GetBaseNameListDto] })
   @ApiUnauthorizedResponse({ description: 'Unauthorized request' })
