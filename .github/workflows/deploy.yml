@@ -21,6 +21,9 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
+      - name: Test
+        run: echo $DATABASE_URL
+
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v0
         with:
@@ -49,18 +52,18 @@ jobs:
           --add-cloudsql-instances ${{ secrets.DB_INSTANCE }}
           --min-instances=1
           --quiet
-          --set-env-vars="DATABASE_URL"="${{ DATABASE_URL }}"
-          --set-env-vars="HOST_URI"="${{ secrets.HOST_URI }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_TYPE"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_TYPE }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_PROJECT_ID"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_ID"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_ID }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_CLIENT_ID"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_ID }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_AUTH_URI"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_URI }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_TOKEN_URI"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_X509_CERT_URL"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_X509_CERT_URL }}"
-          --set-env-vars="FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL }}"
+          --set-env-vars DATABASE_URL=$DATABASE_URL
+          --set-env-vars HOST_URI="${{ secrets.HOST_URI }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_TYPE="${{ secrets.FIREBASE_SERVICE_ACCOUNT_TYPE }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_PROJECT_ID="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_ID="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_ID }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_CLIENT_ID="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_ID }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_AUTH_URI="${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_URI }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_TOKEN_URI="${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_X509_CERT_URL="${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_X509_CERT_URL }}"
+          --set-env-vars FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL }}"
 
       - name: Allowing public (unauthenticated) access
         run: >
