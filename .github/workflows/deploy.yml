@@ -21,9 +21,6 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-      - name: Test
-        run: echo $DATABASE_URL
-
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v0
         with:
@@ -64,9 +61,3 @@ jobs:
           --set-env-vars FIREBASE_SERVICE_ACCOUNT_TOKEN_URI="${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI }}"
           --set-env-vars FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_X509_CERT_URL="${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_X509_CERT_URL }}"
           --set-env-vars FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL="${{ secrets.FIREBASE_SERVICE_ACCOUNT_CLIENT_X509_CERT_URL }}"
-
-      - name: Allowing public (unauthenticated) access
-        run: >
-          gcloud run services add-iam-policy-binding ${{ secrets.SERVICE_NAME }}
-          --member="allUsers"
-          --role="roles/run.invoker"
