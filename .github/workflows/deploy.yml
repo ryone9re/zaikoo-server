@@ -7,6 +7,7 @@ on:
 
 env:
   IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+  DATABASE_URL: postgresql://${{ secrets.DB_USER }}:${{ secrets.DB_PASS }}@localhost:5432/${{ secrets.DB_NAME }}?schema=public
 
 jobs:
   deploy-to-cloud-run:
@@ -48,7 +49,7 @@ jobs:
           --add-cloudsql-instances ${{ secrets.DB_INSTANCE }}
           --min-instances=1
           --quiet
-          --set-env-vars="DATABASE_URL"="${{ secrets.DATABASE_URL }}"
+          --set-env-vars="DATABASE_URL"="$DATABASE_URL"
           --set-env-vars="HOST_URI"="${{ secrets.HOST_URI }}"
           --set-env-vars="FIREBASE_SERVICE_ACCOUNT_TYPE"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_TYPE }}"
           --set-env-vars="FIREBASE_SERVICE_ACCOUNT_PROJECT_ID"="${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID }}"
