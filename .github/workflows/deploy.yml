@@ -47,7 +47,7 @@ jobs:
           --region ${{ secrets.GCP_REGION }}
           --platform=managed
           --add-cloudsql-instances ${{ secrets.DB_INSTANCE }}
-          --min-instances=1sa
+          --min-instances=1
           --quiet
           --set-env-vars="DATABASE_URL"="${{ DATABASE_URL }}"
           --set-env-vars="HOST_URI"="${{ secrets.HOST_URI }}"
